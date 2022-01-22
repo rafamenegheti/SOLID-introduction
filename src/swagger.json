@@ -1,0 +1,172 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Atlas",
+        "description": "Essa é uma documentação sobre Atlas API",
+        "version": "1.0.0",
+        "contact": {
+            "email": "rafaelmenegheti51@gmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": ["users"],
+                "summary": "Create a new user",
+                "description": "Create a new user",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "Object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "user name",
+                                    "email": "useremail@example.com"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Operação realizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "admin": {
+                                            "type": "boolean",
+                                            "enum": ["string"]
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": {
+                                    "admin": "41867ffd-4e84-4053-b609-b528104fcc01",
+                                    "id": "CategoryTest",
+                                    "name": "Category description sample",
+                                    "email": "2022-01-02T07:54:16.671Z",
+                                    "created_at": "2021-03-10T22:10:32:992Z",
+                                    "updated_at": "2021-03-10T22:10:32:992Z"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Email ja esta sendo utilizado",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "This email is already in use"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": ["users"],
+                "summary": "Retornar todos os usuários",
+                "description": "Somente usuários `admin` podem acessar",
+                "parameters": [
+                    {
+                      "name": "user_id",
+                      "in": "header",
+                      "required": true,
+                      "schema": {
+                        "type": "string",
+                        "user_id": {
+                          "type": "string"
+                        }
+                      },
+                      "style": "simple"
+                    }
+                  ],
+                "responses": {
+                    "200": {
+                        "description": "Operação realizada com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "properties": {
+                                        "admin": {
+                                            "type": "boolean",
+                                            "enum": ["string"]
+                                        },
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "email": {
+                                            "type": "string"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "example": [{
+                                    
+                                    "admin": "41867ffd-4e84-4053-b609-b528104fcc01",
+                                    "id": "CategoryTest",
+                                    "name": "Category description sample",
+                                    "email": "2022-01-02T07:54:16.671Z",
+                                    "created_at": "2021-03-10T22:10:32:992Z",
+                                    "updated_at": "2021-03-10T22:10:32:992Z"
+                                }, {
+                                    
+                                    "admin": "41867ffd-4e84-4053-b609-b528104fcc01",
+                                    "id": "CategoryTest",
+                                    "name": "Category description sample",
+                                    "email": "2022-01-02T07:54:16.671Z",
+                                    "created_at": "2021-03-10T22:10:32:992Z",
+                                    "updated_at": "2021-03-10T22:10:32:992Z"
+                                } ]
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Usuário sem permissão pu usuário nao encontrado",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "error": "You need to be an administrator to list all users"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
